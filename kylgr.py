@@ -26,12 +26,26 @@ class MyApp(object):
 		with open("strcmd.txt","a+") as f:
 			f.write(cmd)
 	def keyact(self, event):
-		if event.keysym == 'Up':
-			with open("strcmd.txt","r+") as f:
+		i = 0
+		while( event.keysym == 'Up' or event.keysym == 'Down'):
+			if event.keysym == 'Up':
+				keyup(self, i)
+			elif event.keysym == 'Down':
+				keydown(self, i)
+			else:
+				break
+
+	def keyup(self, i):
+		with open("strcmd.txt","r+") as f:
 				lstline = f.readline()
-			print(lstline[-1])
-		
-					
+			i -= 1
+			print(lstline[i])
+	def keydown(self, i):
+		with open("strcmd.txt","r+") as f:
+				lstline = f.readline()
+			i += 1	
+			print(lstline[i])
+				
 		
 root = tk.Tk()
 app = MyApp(root)
